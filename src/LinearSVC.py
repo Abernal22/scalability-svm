@@ -7,7 +7,7 @@ class LinearSVC:
         self.epochs = epochs
         self.regularization_param = regularization_param
         self.weights = None
-        self.bias = None
+        self.bias = 0
 
     def net_input(self, X):
         """ Compute the preactivation value"""
@@ -16,8 +16,7 @@ class LinearSVC:
     def fit(self, X, y):
         """Train the model using a soft-margin SVC"""
         n_samples, n_features = X.shape
-        self.weights = np.random.randn(n_features)
-        self.bias = 0
+        self.weights = np.zeros(n_features)
 
         # Training loop (Epochs)
         for _ in range(self.epochs):
@@ -29,13 +28,11 @@ class LinearSVC:
                 else:
                     # If the point is misclassified, update weights and bias
                     self.weights -= self.learning_rate * (
-                                2 * self.regularization_param * self.weights - np.dot(X[i], y[i]))
-                    self.bias -= self.learning_rate * y[i]
+                                2 * self.regularization_param * self.weights - y[i] * X[i])
+                    self.bias += self.learning_rate * y[i]
 
 
     def predict(self, X):
         """Generate predictions for input samples"""
         preactivation = self.net_input(X)
         return np.sign(preactivation)
-
-
