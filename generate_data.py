@@ -1,8 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 from sklearn.model_selection import train_test_split
 
-def make_classification(d, n, u, seed=42):
+def make_classification(d, n, u, seed=42, save_to_file = False):
 
     np.random.seed(seed)
     
@@ -18,13 +19,30 @@ def make_classification(d, n, u, seed=42):
     #split testing and training data 70% for training and 30% for testing
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=seed)
 
+    #save datset to CSV file
+    if save_to_file:
+        dataset_filename = f"datased_d{d}_n{n}.csv"
+        hyperplane_filename = f"hyperplane_d{d}_n{n}.csv"
+
+        #save data set
+        df = pd.DataFrame(X, columns=[f"feature_{i+1}" for i in range(d)])
+        df["label"] = y
+        df.to_csv(dataset_filename, index=False)
+
+        #save hyper plane vector
+        pd.DataFrame(a.reshape(1, -1), columns=[f"a_{i+1}" for i in range(d)]).to_csv(hyperplane_filename, index=False)
+
+        print(f"Dataset saved to {dataset_filename}")
+        print(f"Hyperplane vector saved to {hyperplane_filename}")
+
+
     return X_train, X_test, y_train, y_test, X, y, a
 
 #generate 2d data set with n=100 samples
 d = 2
 n = 100
 u = 5
-X_train, X_test, y_train, y_test, X, y, a = make_classification(d, n, u)
+X_train, X_test, y_train, y_test, X, y, a = make_classification(d, n, u, save_to_file = True)
 
 #plot the data set
 plt.figure(figsize=(8, 6))
