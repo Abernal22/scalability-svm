@@ -36,6 +36,6 @@ def gen_files():
     gd.make_classification(1000, 10000, save_to_file= True)
     gd.make_classification(1000, 100000, save_to_file= True)
 
-
-gen_files()    
+if __name__ == "__main__":
+  gen_files()    
 
