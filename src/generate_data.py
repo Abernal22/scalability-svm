@@ -2,8 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.model_selection import train_test_split
+import time
 
-def make_classification(d, n, u, seed=42, save_to_file = False):
+def make_classification(d, n, u=5, seed=42, save_to_file = False):
 
     np.random.seed(seed)
     
@@ -39,20 +40,21 @@ def make_classification(d, n, u, seed=42, save_to_file = False):
     return X_train, X_test, y_train, y_test, X, y, a
 
 #generate 2d data set with n=100 samples
-d = 2
-n = 100
-u = 5
-X_train, X_test, y_train, y_test, X, y, a = make_classification(d, n, u, save_to_file = True)
+if __name__ == "__main__":
+  d = 2
+  n = 100
+  u = 5
+  X_train, X_test, y_train, y_test, X, y, a = make_classification(d, n, u, save_to_file = True)
 
-#plot the data set
-plt.figure(figsize=(8, 6))
-plt.scatter(X[y == -1][:, 0], X[y == -1][:, 1], c='red', label='Class -1')
-plt.scatter(X[y == 1][:, 0], X[y == 1][:, 1], c='blue', label='Class 1')
+  #plot the data set
+  plt.figure(figsize=(8, 6))
+  plt.scatter(X[y == -1][:, 0], X[y == -1][:, 1], c='red', label='Class -1')
+  plt.scatter(X[y == 1][:, 0], X[y == 1][:, 1], c='blue', label='Class 1')
 
-#plot decision hyperplane (a^T x = 0)
-x_vals = np.linspace(-u, u, 100)
-y_vals = - (a[0] * x_vals) / a[1]  # Since a1*x + a2*y = 0 => y = - (a1/a2) * x
-plt.plot(x_vals, y_vals, 'k--', label="Hyperplane")
-plt.legend()
-plt.title("Linearly Separable Data (d=2, n=100)")
-plt.show()
+  #plot decision hyperplane (a^T x = 0)
+  x_vals = np.linspace(-u, u, 100)
+  y_vals = - (a[0] * x_vals) / a[1]  # Since a1*x + a2*y = 0 => y = - (a1/a2) * x
+  plt.plot(x_vals, y_vals, 'k--', label="Hyperplane")
+  plt.legend()
+  plt.title("Linearly Separable Data (d=2, n=100)")
+  plt.show()
