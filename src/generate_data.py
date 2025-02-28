@@ -4,6 +4,11 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 import time
 
+
+#Dimensions and sample sizes to use for tests
+dims = [10, 50, 100, 500, 1000]
+sampSize = [500, 1000, 5000, 10000, 100000]
+
 def make_classification(d, n, u=5, seed=42, save_to_file = False):
 
     np.random.seed(seed)
@@ -36,8 +41,15 @@ def make_classification(d, n, u=5, seed=42, save_to_file = False):
         print(f"Dataset saved to {dataset_filename}")
         print(f"Hyperplane vector saved to {hyperplane_filename}")
 
-
     return X_train, X_test, y_train, y_test, X, y, a
+
+
+def gen_files():
+    #Generate files for every dimension with the largest set since seed is the same.
+    for dim in dims:
+        make_classification(dim, 100000, save_to_file=True)
+
+    #make_classification(10000, 100000, save_to_file= True)
 
 #generate 2d data set with n=100 samples
 if __name__ == "__main__":
