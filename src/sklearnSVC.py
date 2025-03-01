@@ -20,7 +20,7 @@ if __name__ == "__main__":
             numSamps = gd.sampSize[n]
             xsamp = X[:numSamps]
             ysamp = Y[:numSamps]
-            X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
+            X_train, X_test, y_train, y_test = train_test_split(xsamp, ysamp, test_size=0.3, random_state=42)
             dual = LinearSVC(dual=True, loss="hinge", random_state=42)
             primal = LinearSVC(dual=False, random_state=42)
 
@@ -40,5 +40,5 @@ if __name__ == "__main__":
 
             print(f"Dual: {numSamps} samples, {gd.dims[d]} features, {accDual} accuracy, {dualTime} time(s).")
             print(f"Primal: {numSamps} samples, {gd.dims[d]} features, {accPrimal} accuracy, {primalTime} time(s)")
-            
+           
 

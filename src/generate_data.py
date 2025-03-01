@@ -49,7 +49,6 @@ def gen_files():
     for dim in dims:
         make_classification(dim, 100000, save_to_file=True)
 
-    #make_classification(10000, 100000, save_to_file= True)
 
 #generate 2d data set with n=100 samples
 if __name__ == "__main__":
