@@ -6,6 +6,7 @@ import time
 import generate_data as gd
 from sklearn.svm import LinearSVC
 from sklearn.metrics import accuracy_score
+import os
 
 
 if __name__ == "__main__":
@@ -22,7 +23,11 @@ if __name__ == "__main__":
 
     for d in range(len(gd.dims)):
         #Read the dimension d data file in and split it.
-        XY = pd.read_csv(f"datased_d{gd.dims[d]}_n{endSize}.csv")
+        file = f"datased_d{gd.dims[d]}_n{endSize}.csv"
+        if not os.path.exists(file):
+            print("File not found, generating all files")
+            gd.gen_files()
+        XY = pd.read_csv(file)
         X = XY.iloc[:, :-1]
         Y = XY.iloc[:, -1]
 
