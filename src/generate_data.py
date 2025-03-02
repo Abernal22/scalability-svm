@@ -47,7 +47,7 @@ def make_classification(d, n, u=5, seed=42, save_to_file = False):
 def gen_files():
     #Generate files for every dimension with the largest set since seed is the same.
     for dim in dims:
-        make_classification(dim, 100000, save_to_file=True)
+        make_classification(dim, sampSize[len(sampSize)-1], save_to_file=True)
 
 
 #generate 2d data set with n=100 samples
