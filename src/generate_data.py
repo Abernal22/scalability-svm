@@ -5,7 +5,9 @@ from sklearn.model_selection import train_test_split
 import time
 
 
-#Dimensions and sample sizes to use for tests
+#Dimensions and sample sizes for tests
+#Can add dimensions and samples in order from least to greatest
+#And the tests will be correctly run in sklearnSVC.py
 dims = [10, 50, 100, 500, 1000]
 sampSize = [500, 1000, 5000, 10000, 100000]
 
