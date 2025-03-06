@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import time
 import matplotlib.pyplot as plt
-from LinearSVC import LinearSVC  # Import your implemented SVM
-from generate_data import make_classification  # Import dataset generation function
+from LinearSVC import LinearSVC 
+from generate_data import make_classification 
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
